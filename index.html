@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UC San Diego TPUSA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -28,8 +29,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: radial-gradient(circle, rgba(255, 0, 150, 0.4), rgba(0, 153, 255, 0.4));
-            backdrop-filter: blur(15px);
+            background: linear-gradient(135deg, rgba(255, 0, 150, 0.4), rgba(0, 153, 255, 0.4));
+            backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 60px 20px;
             max-width: 1200px;
@@ -37,60 +38,109 @@
             opacity: 0;
             transform: translateY(50px);
             animation: fadeInUp 1s ease-out forwards;
-            box-shadow: 0px 0px 40px rgba(255, 0, 150, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 10%, transparent 10.01%);
+            background-size: 20px 20px;
+            opacity: 0.3;
+            pointer-events: none;
         }
         .hero h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            letter-spacing: 2px;
+            font-size: 4.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
             animation: slideIn 1s ease-in-out;
-            text-shadow: 2px 2px 15px rgba(255, 255, 255, 0.2);
+            text-shadow: 0 0 20px rgba(255, 0, 150, 0.8), 0 0 40px rgba(0, 153, 255, 0.8);
         }
         .hero p {
-            font-size: 1.4rem;
-            margin-top: 15px;
+            font-size: 1.5rem;
+            margin-top: 10px;
             opacity: 0;
             animation: fadeIn 1.5s ease-in-out forwards 0.5s;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
         .btn {
             display: inline-block;
-            padding: 15px 40px;
+            padding: 15px 30px;
             margin-top: 20px;
-            font-size: 1.3em;
+            font-size: 1.2em;
             color: white;
             background: linear-gradient(135deg, #ff007f, #007bff);
             text-decoration: none;
-            border-radius: 50px;
+            border-radius: 30px;
             transition: 0.3s ease;
             transform: scale(0.9);
             animation: pulse 1.5s infinite;
-            box-shadow: 0px 4px 15px rgba(255, 0, 150, 0.3);
+            box-shadow: 0 0 20px rgba(255, 0, 150, 0.5), 0 0 40px rgba(0, 153, 255, 0.5);
         }
         .btn:hover {
-            opacity: 0.9;
-            transform: scale(1.05);
+            opacity: 0.8;
+            transform: scale(1);
+            box-shadow: 0 0 30px rgba(255, 0, 150, 0.8), 0 0 60px rgba(0, 153, 255, 0.8);
         }
         .container {
             max-width: 1000px;
-            padding: 50px 30px;
-            background: rgba(255, 255, 255, 0.15);
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 20px;
-            backdrop-filter: blur(20px);
-            margin: 30px auto;
+            backdrop-filter: blur(10px);
+            margin: 20px auto;
             opacity: 0;
             transform: translateY(50px);
             animation: fadeInUp 1s ease-out forwards 0.5s;
-            box-shadow: 0px 0px 30px rgba(255, 0, 150, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 10%, transparent 10.01%);
+            background-size: 20px 20px;
+            opacity: 0.3;
+            pointer-events: none;
         }
         .footer {
-            margin-top: 30px;
-            padding: 25px;
+            margin-top: 20px;
+            padding: 20px;
             width: 100%;
             text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
         }
         .footer a {
             color: #ff007f;
             text-decoration: none;
+            transition: 0.3s ease;
+        }
+        .footer a:hover {
+            color: #007bff;
+            text-shadow: 0 0 10px rgba(0, 153, 255, 0.8);
+        }
+        .social-icons {
+            margin-top: 10px;
+        }
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: 0.3s ease;
+        }
+        .social-icons a:hover {
+            color: #ff007f;
+            transform: scale(1.2);
         }
 
         @keyframes fadeInUp {
@@ -132,6 +182,17 @@
                 transform: scale(0.95);
             }
         }
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 10px rgba(255, 0, 150, 0.8), 0 0 20px rgba(0, 153, 255, 0.8);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(255, 0, 150, 0.8), 0 0 40px rgba(0, 153, 255, 0.8);
+            }
+            100% {
+                text-shadow: 0 0 10px rgba(255, 0, 150, 0.8), 0 0 20px rgba(0, 153, 255, 0.8);
+            }
+        }
     </style>
 </head>
 <body>
@@ -153,8 +214,23 @@
     </section>
 
     <footer class="footer">
+        <div class="social-icons">
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+        </div>
         <p>Follow us on <a href="#">Instagram</a> | <a href="#">Twitter</a></p>
         <p>&copy; 2024 TPUSA UC San Diego</p>
     </footer>
+
+    <script>
+        // Add some interactive JavaScript for extra awesomeness
+        document.addEventListener('scroll', () => {
+            const hero = document.querySelector('.hero');
+            const scrollPosition = window.scrollY;
+            hero.style.backgroundPositionY = `${scrollPosition * 0.5}px`;
+        });
+    </script>
 </body>
 </html>
