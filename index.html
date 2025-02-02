@@ -5,23 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UC San Diego TPUSA</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background: #0e0e0e;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            background-color: #f4f4f4;
         }
         .hero {
-            background: url('https://source.unsplash.com/1600x900/?college,america') center/cover no-repeat;
-            color: white;
-            padding: 100px 20px;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(255, 0, 150, 0.4), rgba(0, 153, 255, 0.4));
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 30px auto;
         }
         .hero h1 {
-            font-size: 3em;
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
-        .container {
-            padding: 50px 20px;
+        .hero p {
+            font-size: 1.2rem;
+            margin-top: 10px;
         }
         .btn {
             display: inline-block;
@@ -29,20 +49,30 @@
             margin-top: 20px;
             font-size: 1.2em;
             color: white;
-            background: #c00;
+            background: linear-gradient(135deg, #ff007f, #007bff);
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 30px;
+            transition: 0.3s ease;
         }
         .btn:hover {
-            background: #900;
+            opacity: 0.8;
+        }
+        .container {
+            max-width: 1000px;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            margin: 20px auto;
         }
         .footer {
-            background: #222;
-            color: white;
-            padding: 20px 0;
+            margin-top: 20px;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
         }
         .footer a {
-            color: #c00;
+            color: #ff007f;
             text-decoration: none;
         }
     </style>
@@ -71,4 +101,3 @@
     </footer>
 </body>
 </html>
-
