@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Lexend:wght@700&display=swap" rel="stylesheet" />
-  <!-- Font Awesome for icons -->
+  <!-- Font Awesome for icons (clean, simplistic icons) -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -27,8 +27,9 @@
        CSS Variables for Red/Maroon Theme & Fonts
     ============================== */
     :root {
-      --primary-color: #800000;       /* Maroon */
-      --secondary-color: #a52a2a;       /* Lighter maroon */
+      --primary-color: #FF0000;       /* Bright red as default for interactive elements */
+      --hover-color: #800000;         /* Maroon when hovered */
+      --secondary-color: #a52a2a;       /* Additional maroon tone if needed */
       --accent-color: #ffcccc;          /* Accent (light pink) */
       --bg-color: #fdfdfd;              /* Light background */
       --text-color: #333;
@@ -49,7 +50,11 @@
     /* =============================
        Global & Reset Styles
     ============================== */
-    * {
+    /* Hide the native cursor completely everywhere */
+    * { cursor: none !important; }
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -63,7 +68,6 @@
       color: var(--text-color);
       line-height: 1.6;
       transition: background-color 0.3s ease, color 0.3s ease;
-      cursor: none; /* Hide default cursor for our custom one */
     }
     h1, h2, h3, .logo, .hero h1, section h2 {
       font-family: 'Lexend', sans-serif;
@@ -80,42 +84,6 @@
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 40px; /* Increased horizontal spacing */
-    }
-
-    /* =============================
-       Custom Cursor & Effects
-    ============================== */
-    #custom-cursor {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 20px;
-      height: 20px;
-      background: var(--primary-color);
-      border-radius: 50%;
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s ease, background 0.2s ease, box-shadow 0.2s ease;
-      z-index: 2000;
-    }
-    .cursor-merge {
-      transform: translate(-50%, -50%) scale(3) !important;
-      background: var(--secondary-color) !important;
-      box-shadow: 0 0 15px 5px var(--secondary-color);
-    }
-
-    /* =============================
-       Progress Bar at Top
-    ============================== */
-    #progress-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 4px;
-      background: var(--primary-color);
-      width: 0%;
-      z-index: 1500;
-      transition: width 0.1s ease;
     }
 
     /* =============================
@@ -142,6 +110,11 @@
       font-weight: 700;
       letter-spacing: 1px;
       color: var(--text-color);
+    }
+    /* Added a small robot icon for a modern AI feel */
+    .logo i {
+      margin-right: 8px;
+      color: var(--primary-color);
     }
     nav ul {
       list-style: none;
@@ -180,12 +153,12 @@
       transition: transform 0.3s ease;
     }
     .cta-nav a:hover {
-      background: var(--secondary-color);
+      background: var(--hover-color);
       transform: translateY(-3px);
     }
     /* Dark mode toggle button */
     .theme-toggle {
-      cursor: pointer;
+      cursor: none; /* Keep hidden */
       font-size: 1.2rem;
       color: var(--text-color);
       margin-left: 20px;
@@ -198,7 +171,7 @@
     .menu-toggle {
       display: none;
       font-size: 1.5rem;
-      cursor: pointer;
+      cursor: none;
       color: var(--text-color);
     }
     @media (max-width: 768px) {
@@ -219,6 +192,20 @@
       .menu-toggle {
         display: block;
       }
+    }
+
+    /* =============================
+       Progress Bar at Top
+    ============================== */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: var(--primary-color);
+      width: 0%;
+      z-index: 1500;
+      transition: width 0.1s ease;
     }
 
     /* =============================
@@ -274,6 +261,9 @@
       animation: fadeInDown 0.8s forwards;
       animation-delay: 0.3s;
     }
+    /* =============================
+       Button (CTA) Effect – No visible cursor; element itself expands and glows on hover
+    ============================== */
     .cta {
       padding: 15px 30px;
       font-size: 1rem;
@@ -281,15 +271,15 @@
       color: #fff;
       border: none;
       border-radius: 50px;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.3s ease;
+      transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
       box-shadow: 0 4px 8px var(--shadow-color);
       animation: fadeInDown 0.8s forwards;
       animation-delay: 0.6s;
     }
     .cta:hover {
-      background: var(--secondary-color);
-      transform: translateY(-3px);
+      background: var(--hover-color);
+      transform: scale(1.1);
+      box-shadow: 0 0 15px 5px rgba(128, 0, 0, 0.7);
     }
     @keyframes fadeInDown {
       from { opacity: 0; transform: translateY(-20px); }
@@ -345,7 +335,7 @@
       width: 300px;
       box-shadow: 0 2px 8px var(--shadow-color);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
+      cursor: none;
       position: relative;
       overflow: hidden;
       backdrop-filter: blur(10px);
@@ -430,7 +420,7 @@
       text-align: center;
       box-shadow: 0 2px 8px var(--shadow-color);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: default;
+      cursor: none;
       backdrop-filter: blur(10px);
     }
     .stat-card:hover {
@@ -456,8 +446,8 @@
        Newsletter Section
     ============================== */
     #newsletter input[type="email"] {
-      padding: 10px;
-      border-radius: 5px;
+      padding: 15px;
+      border-radius: 30px;
       border: 1px solid #ccc;
       width: 80%;
       max-width: 300px;
@@ -477,14 +467,14 @@
       transition: color 0.3s;
     }
     #contact a:hover {
-      color: var(--secondary-color);
+      color: var(--hover-color);
     }
 
     /* =============================
        Footer with Gradient Background & Animated Icons
     ============================== */
     footer {
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      background: linear-gradient(135deg, var(--primary-color), var(--hover-color));
       color: var(--bg-color);
       padding: 50px 0;
       text-align: center;
@@ -520,14 +510,14 @@
       border: none;
       padding: 12px;
       border-radius: 50%;
-      cursor: pointer;
+      cursor: none;
       font-size: 1.2rem;
       display: none;
       z-index: 1000;
       transition: background 0.3s ease;
     }
     #scrollToTop:hover {
-      background: var(--secondary-color);
+      background: var(--hover-color);
     }
 
     /* =============================
@@ -561,8 +551,7 @@
   </style>
 </head>
 <body data-theme="light">
-  <!-- Custom Cursor -->
-  <div id="custom-cursor"></div>
+  <!-- No custom cursor element – the default cursor is entirely hidden -->
   <!-- Progress Bar -->
   <div id="progress-bar"></div>
   <!-- Loading Spinner -->
@@ -572,7 +561,9 @@
   <header>
     <div class="container">
       <nav>
-        <div class="logo" aria-label="TPUSA at UC San Diego Home">TPUSA @ UC San Diego</div>
+        <div class="logo" aria-label="TPUSA at UC San Diego Home">
+          <i class="fas fa-robot"></i> TPUSA @ UC San Diego
+        </div>
         <div class="menu-toggle" id="mobile-menu" aria-label="Toggle navigation menu"><i class="fas fa-bars"></i></div>
         <ul id="nav-links">
           <li><a href="#about" aria-label="Navigate to About section">About</a></li>
@@ -969,27 +960,6 @@
         }
       },
       "retina_detect": true
-    });
-
-    // Custom Cursor functionality with merge effect on interactive elements
-    const customCursor = document.getElementById('custom-cursor');
-    document.addEventListener('mousemove', (e) => {
-      customCursor.style.top = e.clientY + 'px';
-      customCursor.style.left = e.clientX + 'px';
-    });
-    const interactiveElements = document.querySelectorAll('a, button, .card');
-    interactiveElements.forEach(elem => {
-      elem.addEventListener('mouseenter', () => {
-        if (elem.tagName.toLowerCase() === "button" || elem.classList.contains('cta')) {
-          customCursor.classList.add('cursor-merge');
-        } else {
-          customCursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
-        }
-      });
-      elem.addEventListener('mouseleave', () => {
-        customCursor.classList.remove('cursor-merge');
-        customCursor.style.transform = 'translate(-50%, -50%) scale(1)';
-      });
     });
   </script>
 </body>
