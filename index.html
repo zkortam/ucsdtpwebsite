@@ -19,19 +19,21 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   />
+  <!-- Canvas Confetti Library for CTA effect -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
     /* =============================
        CSS Variables for Theming
     ============================== */
     :root {
-      --primary-color: #c0392b; /* Bold burgundy/red accent */
-      --secondary-color: #800020;
+      --primary-color: #4285F4; /* Bright Blue for CTA and accents */
+      --secondary-color: #3367D6; /* Darker Blue for hover states */
       --bg-color: #f7f9fc;
       --text-color: #333;
       --card-bg: #ffffff;
       --nav-bg: rgba(255, 255, 255, 0.95);
       --shadow-color: rgba(0, 0, 0, 0.1);
-      --gradient-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      --gradient-bg: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
     }
     [data-theme="dark"] {
       --bg-color: #1e1e1e;
@@ -103,12 +105,14 @@
       list-style: none;
       display: flex;
       gap: 25px;
+      align-items: center;
     }
     nav ul li a {
       font-weight: 500;
       color: var(--text-color);
       transition: color 0.3s ease;
       position: relative;
+      padding: 5px;
     }
     nav ul li a::after {
       content: "";
@@ -123,6 +127,18 @@
     }
     nav ul li a:hover::after {
       width: 100%;
+    }
+    /* CTA button in navigation */
+    .cta-nav a {
+      background: var(--primary-color);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 50px;
+      margin-left: 10px;
+    }
+    .cta-nav a:hover {
+      background: var(--secondary-color);
+      transform: translateY(-3px);
     }
     /* Dark mode toggle button */
     .theme-toggle {
@@ -174,6 +190,7 @@
       text-align: center;
       padding: 0 20px;
       background: var(--gradient-bg);
+      background-attachment: fixed;
       overflow: hidden;
     }
     /* SVG background shapes for extra visual flair */
@@ -348,10 +365,36 @@
     }
 
     /* =============================
-       Join Section
+       Impact/Statistics Section
     ============================== */
-    #join .cta {
-      margin-top: 20px;
+    #impact .stats-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+    .stat-card {
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 15px;
+      width: 250px;
+      text-align: center;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+    }
+    .stat-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+    .stat-label {
+      font-size: 1rem;
+      margin-top: 10px;
     }
 
     /* =============================
@@ -444,6 +487,30 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* =============================
+       Chatbot Icon
+    ============================== */
+    #chatbot {
+      position: fixed;
+      bottom: 100px;
+      right: 40px;
+      background: var(--primary-color);
+      color: #fff;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 8px var(--shadow-color);
+      transition: transform 0.3s ease;
+      z-index: 1000;
+    }
+    #chatbot:hover {
+      transform: scale(1.1);
+    }
   </style>
 </head>
 <body data-theme="light">
@@ -458,7 +525,7 @@
           <li><a href="#mission">Mission</a></li>
           <li><a href="#events">Events</a></li>
           <li><a href="#testimonials">Testimonials</a></li>
-          <li><a href="#join">Join</a></li>
+          <li class="cta-nav"><a href="#join">Join</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><span class="theme-toggle" id="theme-toggle"><i class="fas fa-moon"></i></span></li>
         </ul>
@@ -478,9 +545,7 @@
     <div class="fade-in">
       <h1>Empowering Conservative Voices</h1>
       <p>Welcome to TPUSA at UC San Diego – where ideas ignite change and leadership thrives.</p>
-      <button class="cta" onclick="document.getElementById('join').scrollIntoView({ behavior: 'smooth' });">
-        Join Us
-      </button>
+      <button class="cta" onclick="heroCTA()">Join Us</button>
     </div>
   </section>
 
@@ -562,6 +627,27 @@
     </div>
   </section>
 
+  <!-- Impact/Statistics Section -->
+  <section id="impact">
+    <div class="container">
+      <h2 class="fade-in">Our Impact</h2>
+      <div class="stats-container fade-in" style="animation-delay: 0.3s;">
+        <div class="stat-card">
+          <div class="stat-number" data-target="150">0</div>
+          <div class="stat-label">Members</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-target="25">0</div>
+          <div class="stat-label">Events Held</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" data-target="10">0</div>
+          <div class="stat-label">Campus Outreach</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Join Section -->
   <section id="join">
     <div class="container">
@@ -623,6 +709,11 @@
   <button id="scrollToTop" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
     <i class="fas fa-arrow-up"></i>
   </button>
+
+  <!-- Chatbot Icon -->
+  <div id="chatbot" onclick="alert('Chat feature coming soon!')">
+    <i class="fas fa-comment-dots"></i>
+  </div>
 
   <!-- =============================
        JavaScript for Interactivity
@@ -697,6 +788,52 @@
       alert('Thank you for subscribing with ' + email);
       document.getElementById('newsletter-form').reset();
     }
+
+    // Hero CTA with confetti effect
+    function heroCTA() {
+      // Trigger confetti burst
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+      // Scroll to Join section after short delay
+      setTimeout(() => {
+        document.getElementById('join').scrollIntoView({ behavior: 'smooth' });
+      }, 500);
+    }
+
+    // Animate numbers in the Impact section
+    const statNumbers = document.querySelectorAll('.stat-number');
+    const animateStats = () => {
+      statNumbers.forEach(stat => {
+        const target = +stat.getAttribute('data-target');
+        const increment = target / 200; // Adjust speed
+        let current = 0;
+        const updateNumber = () => {
+          current += increment;
+          if (current < target) {
+            stat.textContent = Math.floor(current);
+            requestAnimationFrame(updateNumber);
+          } else {
+            stat.textContent = target;
+          }
+        };
+        updateNumber();
+      });
+    };
+
+    // Trigger stats animation when the Impact section is visible
+    const impactSection = document.getElementById('impact');
+    const impactObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateStats();
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    impactObserver.observe(impactSection);
   </script>
 </body>
 </html>
