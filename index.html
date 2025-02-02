@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TPUSA at UC San Diego</title>
-  <!-- Google Fonts: Poppins for body and Montserrat for headings -->
+  <!-- Google Fonts: Lexend for headings and Inter for body -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Lexend:wght@700&display=swap" rel="stylesheet" />
   <!-- Font Awesome for icons -->
   <link
     rel="stylesheet"
@@ -24,24 +24,24 @@
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
     /* =============================
-       CSS Variables for Theming
+       CSS Variables for Red/Maroon Theme & Fonts
     ============================== */
     :root {
-      --primary-color: #4285F4; /* Bright Blue */
-      --secondary-color: #3367D6; /* Darker Blue for hover states */
-      --accent-color: #fbc2eb; /* Accent for gradient */
-      --bg-color: #f7f9fc;
+      --primary-color: #800000;       /* Maroon */
+      --secondary-color: #a52a2a;       /* Lighter maroon */
+      --accent-color: #ffcccc;          /* Accent (light pink) */
+      --bg-color: #fdfdfd;              /* Light background */
       --text-color: #333;
-      --card-bg: rgba(255, 255, 255, 0.8);
-      --nav-bg: rgba(255, 255, 255, 0.95);
+      --card-bg: rgba(255, 255, 255, 0.5); /* Translucent for glassmorphism */
+      --nav-bg: rgba(255, 255, 255, 0.8);
       --shadow-color: rgba(0, 0, 0, 0.1);
-      --gradient-bg: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+      --gradient-bg: linear-gradient(135deg, #ffcccc 0%, #800000 100%);
     }
     [data-theme="dark"] {
       --bg-color: #1e1e1e;
       --text-color: #f7f9fc;
-      --card-bg: rgba(44, 44, 44, 0.8);
-      --nav-bg: rgba(30, 30, 30, 0.95);
+      --card-bg: rgba(44, 44, 44, 0.5);
+      --nav-bg: rgba(30, 30, 30, 0.8);
       --shadow-color: rgba(0, 0, 0, 0.5);
       --gradient-bg: linear-gradient(135deg, #2c2c2c 0%, #1e1e1e 100%);
     }
@@ -58,12 +58,15 @@
       scroll-behavior: smooth;
     }
     body {
-      font-family: "Poppins", sans-serif;
+      font-family: 'Inter', sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
       line-height: 1.6;
       transition: background-color 0.3s ease, color 0.3s ease;
-      cursor: none; /* Hide default cursor to show custom cursor */
+      cursor: none; /* Hide default cursor for our custom one */
+    }
+    h1, h2, h3, .logo, .hero h1, section h2 {
+      font-family: 'Lexend', sans-serif;
     }
     a {
       text-decoration: none;
@@ -73,9 +76,14 @@
       max-width: 100%;
       display: block;
     }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px; /* Increased horizontal spacing */
+    }
 
     /* =============================
-       Custom Cursor
+       Custom Cursor & Effects
     ============================== */
     #custom-cursor {
       position: fixed;
@@ -87,8 +95,13 @@
       border-radius: 50%;
       pointer-events: none;
       transform: translate(-50%, -50%);
-      transition: transform 0.1s ease;
+      transition: transform 0.1s ease, background 0.2s ease, box-shadow 0.2s ease;
       z-index: 2000;
+    }
+    .cursor-merge {
+      transform: translate(-50%, -50%) scale(3) !important;
+      background: var(--secondary-color) !important;
+      box-shadow: 0 0 15px 5px var(--secondary-color);
     }
 
     /* =============================
@@ -106,7 +119,7 @@
     }
 
     /* =============================
-       Navigation
+       Navigation (with Glassmorphism)
     ============================== */
     header {
       position: fixed;
@@ -114,14 +127,9 @@
       top: 0;
       z-index: 1000;
       background: var(--nav-bg);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(20px);
       box-shadow: 0 2px 4px var(--shadow-color);
       transition: background 0.3s ease;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
     }
     nav {
       display: flex;
@@ -130,7 +138,6 @@
       padding: 15px 0;
     }
     .logo {
-      font-family: 'Montserrat', sans-serif;
       font-size: 1.8rem;
       font-weight: 700;
       letter-spacing: 1px;
@@ -170,6 +177,7 @@
       padding: 8px 16px;
       border-radius: 50px;
       margin-left: 10px;
+      transition: transform 0.3s ease;
     }
     .cta-nav a:hover {
       background: var(--secondary-color);
@@ -214,7 +222,7 @@
     }
 
     /* =============================
-       Hero Section with Particle Background & Typewriter Text
+       Hero Section with Enhanced Particles & Typewriter Text
     ============================== */
     .hero {
       position: relative;
@@ -235,17 +243,6 @@
       left: 0;
       z-index: 0;
     }
-    /* Optional Video Background (uncomment if you have a video)
-    #hero-video {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      top: 0;
-      left: 0;
-      z-index: 0;
-    }
-    */
     /* Hero Content */
     .hero .hero-content {
       position: relative;
@@ -253,7 +250,6 @@
     }
     /* Typewriter effect for hero headline */
     .hero h1 {
-      font-family: 'Montserrat', sans-serif;
       font-size: 3rem;
       margin-bottom: 20px;
       color: var(--text-color);
@@ -301,15 +297,14 @@
     }
 
     /* =============================
-       Section Styles
+       Section Styles & Spacing
     ============================== */
     section {
-      padding: 120px 0 80px;
+      padding: 140px 0 100px;
       position: relative;
       overflow: hidden;
     }
     section h2 {
-      font-family: 'Montserrat', sans-serif;
       text-align: center;
       font-size: 2.5rem;
       margin-bottom: 50px;
@@ -335,7 +330,7 @@
     }
 
     /* =============================
-       Cards (Events) with Glassmorphism
+       Cards (Events) with 3D & Glassmorphism
     ============================== */
     .cards {
       display: flex;
@@ -356,7 +351,7 @@
       backdrop-filter: blur(10px);
     }
     .card:hover {
-      transform: translateY(-5px);
+      transform: perspective(600px) rotateX(5deg) rotateY(5deg) scale(1.03);
       box-shadow: 0 4px 12px var(--shadow-color);
     }
     .card h3 {
@@ -419,7 +414,7 @@
     }
 
     /* =============================
-       Impact/Statistics Section
+       Impact/Statistics Section with Icons
     ============================== */
     #impact .stats-container {
       display: flex;
@@ -441,6 +436,11 @@
     .stat-card:hover {
       transform: translateY(-3px);
       box-shadow: 0 4px 12px var(--shadow-color);
+    }
+    .stat-card i {
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 10px;
     }
     .stat-number {
       font-size: 2.5rem;
@@ -481,7 +481,7 @@
     }
 
     /* =============================
-       Footer with Gradient Background
+       Footer with Gradient Background & Animated Icons
     ============================== */
     footer {
       background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
@@ -565,7 +565,7 @@
   <div id="custom-cursor"></div>
   <!-- Progress Bar -->
   <div id="progress-bar"></div>
-  <!-- Loading Spinner (for dynamic content if needed) -->
+  <!-- Loading Spinner -->
   <div id="loading-spinner" role="status" aria-live="polite">Loading...</div>
   
   <!-- Navigation -->
@@ -591,11 +591,7 @@
   <section class="hero">
     <!-- Particle Background -->
     <div id="particles-js"></div>
-    <!-- Optional Video Background (uncomment below if using a video)
-    <video autoplay loop muted playsinline id="hero-video" loading="lazy" poster="video-poster.jpg">
-      <source src="video.mp4" type="video/mp4">
-    </video>
-    -->
+    <!-- Hero Content -->
     <div class="hero-content fade-in">
       <h1>Empowering Conservative Voices</h1>
       <p>Welcome to TPUSA at UC San Diego – where ideas ignite change and leadership thrives.</p>
@@ -606,7 +602,7 @@
   <!-- About Section -->
   <section id="about">
     <div class="container">
-      <h2 class="fade-in">About Us</h2>
+      <h2 class="fade-in">About Us <i class="fas fa-info-circle"></i></h2>
       <div class="content fade-in" style="animation-delay: 0.3s;">
         <p>
           TPUSA at UC San Diego is dedicated to fostering a community of innovative and forward-thinking conservative students. We strive to empower our members to lead, advocate, and create a vibrant environment for dialogue and change on campus.
@@ -618,7 +614,7 @@
   <!-- Mission Section -->
   <section id="mission">
     <div class="container">
-      <h2 class="fade-in">Our Mission</h2>
+      <h2 class="fade-in">Our Mission <i class="fas fa-bullseye"></i></h2>
       <div class="content fade-in" style="animation-delay: 0.3s;">
         <p>
           Our mission is to build a network of like-minded individuals who are passionate about promoting free enterprise, individual liberty, and limited government. We aim to inspire leadership through educational events, meaningful discussions, and hands-on experiences.
@@ -630,22 +626,22 @@
   <!-- Events Section -->
   <section id="events">
     <div class="container">
-      <h2 class="fade-in">Upcoming Events</h2>
+      <h2 class="fade-in">Upcoming Events <i class="fas fa-calendar-alt"></i></h2>
       <div class="cards">
         <div class="card fade-in" style="animation-delay: 0.4s;" tabindex="0" aria-label="Event: Leadership Summit">
-          <h3>Leadership Summit</h3>
+          <h3><i class="fas fa-chalkboard-teacher"></i> Leadership Summit</h3>
           <p>
             Join us for an immersive experience where you'll learn from seasoned leaders and network with peers.
           </p>
         </div>
         <div class="card fade-in" style="animation-delay: 0.5s;" tabindex="0" aria-label="Event: Campus Forum">
-          <h3>Campus Forum</h3>
+          <h3><i class="fas fa-comments"></i> Campus Forum</h3>
           <p>
             Engage in thoughtful discussions on the latest issues affecting our community and the nation.
           </p>
         </div>
         <div class="card fade-in" style="animation-delay: 0.6s;" tabindex="0" aria-label="Event: Workshop Series">
-          <h3>Workshop Series</h3>
+          <h3><i class="fas fa-tools"></i> Workshop Series</h3>
           <p>
             Participate in hands-on sessions designed to hone your leadership and organizational skills.
           </p>
@@ -657,7 +653,7 @@
   <!-- Testimonials Section -->
   <section id="testimonials">
     <div class="container">
-      <h2 class="fade-in">Testimonials</h2>
+      <h2 class="fade-in">Testimonials <i class="fas fa-quote-right"></i></h2>
       <div class="testimonial-slider fade-in">
         <div class="testimonial-slide active">
           <div class="testimonial-content">
@@ -684,17 +680,20 @@
   <!-- Impact/Statistics Section -->
   <section id="impact">
     <div class="container">
-      <h2 class="fade-in">Our Impact</h2>
+      <h2 class="fade-in">Our Impact <i class="fas fa-chart-line"></i></h2>
       <div class="stats-container fade-in" style="animation-delay: 0.3s;">
         <div class="stat-card">
+          <i class="fas fa-users"></i>
           <div class="stat-number" data-target="150">0</div>
           <div class="stat-label">Members</div>
         </div>
         <div class="stat-card">
+          <i class="fas fa-calendar-check"></i>
           <div class="stat-number" data-target="25">0</div>
           <div class="stat-label">Events Held</div>
         </div>
         <div class="stat-card">
+          <i class="fas fa-university"></i>
           <div class="stat-number" data-target="10">0</div>
           <div class="stat-label">Campus Outreach</div>
         </div>
@@ -705,7 +704,7 @@
   <!-- Join Section -->
   <section id="join">
     <div class="container">
-      <h2 class="fade-in">Become a Member</h2>
+      <h2 class="fade-in">Become a Member <i class="fas fa-user-plus"></i></h2>
       <div class="content fade-in" style="animation-delay: 0.3s;">
         <p>
           Ready to make an impact? Join our community of driven and passionate individuals. Together, we can shape the future of UC San Diego and beyond.
@@ -715,10 +714,10 @@
     </div>
   </section>
 
-  <!-- Newsletter Subscription Section with Real-Time Validation -->
+  <!-- Newsletter Subscription Section -->
   <section id="newsletter">
     <div class="container">
-      <h2 class="fade-in">Stay Updated</h2>
+      <h2 class="fade-in">Stay Updated <i class="fas fa-envelope"></i></h2>
       <div class="content fade-in" style="animation-delay: 0.3s;">
         <p>Subscribe to our newsletter for the latest updates and events.</p>
         <form id="newsletter-form" onsubmit="subscribeNewsletter(event)" novalidate>
@@ -732,7 +731,7 @@
   <!-- Contact Section -->
   <section id="contact">
     <div class="container">
-      <h2 class="fade-in">Contact Us</h2>
+      <h2 class="fade-in">Contact Us <i class="fas fa-headset"></i></h2>
       <div class="content fade-in" style="animation-delay: 0.3s;">
         <p>
           Have questions or want to learn more about TPUSA at UC San Diego? Reach out to us – we'd love to hear from you.
@@ -768,7 +767,7 @@
   </div>
 
   <!-- =============================
-       JavaScript for Interactivity
+       JavaScript for Interactivity & Effects
   ============================== -->
   <script>
     // Mobile menu toggle
@@ -838,7 +837,7 @@
       }
     });
 
-    // Dummy Newsletter Subscription function with Email Validation
+    // Newsletter Subscription with Email Validation
     function validateEmail(email) {
       const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       return regex.test(email);
@@ -857,13 +856,11 @@
 
     // Hero CTA with confetti effect
     function heroCTA() {
-      // Trigger confetti burst
       confetti({
         particleCount: 100,
         spread: 70,
         origin: { y: 0.6 }
       });
-      // Scroll to Join section after short delay
       setTimeout(() => {
         document.getElementById('join').scrollIntoView({ behavior: 'smooth' });
       }, 500);
@@ -888,7 +885,6 @@
         updateNumber();
       });
     };
-    // Trigger stats animation when the Impact section is visible
     const impactSection = document.getElementById('impact');
     const impactObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
@@ -900,44 +896,41 @@
     }, { threshold: 0.5 });
     impactObserver.observe(impactSection);
 
-    // Initialize Particles.js for background effect in hero section
+    // Initialize Particles.js with enhanced 3D/multi-shape effect
     particlesJS("particles-js", {
       "particles": {
         "number": {
-          "value": 80,
+          "value": 120,
           "density": {
             "enable": true,
             "value_area": 800
           }
         },
         "color": {
-          "value": "#4285F4"
+          "value": "#800000"
         },
         "shape": {
-          "type": "circle",
+          "type": ["circle", "polygon"],
           "stroke": {
             "width": 0,
-            "color": "#000000"
+            "color": "#800000"
+          },
+          "polygon": {
+            "nb_sides": 6
           }
         },
         "opacity": {
           "value": 0.5,
-          "random": false,
-          "anim": {
-            "enable": false
-          }
+          "random": false
         },
         "size": {
           "value": 3,
-          "random": true,
-          "anim": {
-            "enable": false
-          }
+          "random": true
         },
         "line_linked": {
           "enable": true,
           "distance": 150,
-          "color": "#4285F4",
+          "color": "#800000",
           "opacity": 0.4,
           "width": 1
         },
@@ -978,19 +971,23 @@
       "retina_detect": true
     });
 
-    // Custom Cursor functionality
+    // Custom Cursor functionality with merge effect on interactive elements
     const customCursor = document.getElementById('custom-cursor');
     document.addEventListener('mousemove', (e) => {
       customCursor.style.top = e.clientY + 'px';
       customCursor.style.left = e.clientX + 'px';
     });
-    // Optional: Enlarge cursor on hover over interactive elements
     const interactiveElements = document.querySelectorAll('a, button, .card');
     interactiveElements.forEach(elem => {
       elem.addEventListener('mouseenter', () => {
-        customCursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+        if (elem.tagName.toLowerCase() === "button" || elem.classList.contains('cta')) {
+          customCursor.classList.add('cursor-merge');
+        } else {
+          customCursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+        }
       });
       elem.addEventListener('mouseleave', () => {
+        customCursor.classList.remove('cursor-merge');
         customCursor.style.transform = 'translate(-50%, -50%) scale(1)';
       });
     });
