@@ -4,13 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TPUSA at UC San Diego</title>
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Poppins for body and Montserrat for headings -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet" />
   <!-- Font Awesome for icons -->
   <link
     rel="stylesheet"
@@ -19,6 +16,10 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   />
+  <!-- GSAP Library for advanced animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+  <!-- Particles.js Library for background effects -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
   <!-- Canvas Confetti Library for CTA effect -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
@@ -26,11 +27,12 @@
        CSS Variables for Theming
     ============================== */
     :root {
-      --primary-color: #4285F4; /* Bright Blue for CTA and accents */
+      --primary-color: #4285F4; /* Bright Blue */
       --secondary-color: #3367D6; /* Darker Blue for hover states */
+      --accent-color: #fbc2eb; /* Accent for gradient */
       --bg-color: #f7f9fc;
       --text-color: #333;
-      --card-bg: #ffffff;
+      --card-bg: rgba(255, 255, 255, 0.8);
       --nav-bg: rgba(255, 255, 255, 0.95);
       --shadow-color: rgba(0, 0, 0, 0.1);
       --gradient-bg: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
@@ -38,7 +40,7 @@
     [data-theme="dark"] {
       --bg-color: #1e1e1e;
       --text-color: #f7f9fc;
-      --card-bg: #2c2c2c;
+      --card-bg: rgba(44, 44, 44, 0.8);
       --nav-bg: rgba(30, 30, 30, 0.95);
       --shadow-color: rgba(0, 0, 0, 0.5);
       --gradient-bg: linear-gradient(135deg, #2c2c2c 0%, #1e1e1e 100%);
@@ -61,6 +63,7 @@
       color: var(--text-color);
       line-height: 1.6;
       transition: background-color 0.3s ease, color 0.3s ease;
+      cursor: none; /* Hide default cursor to show custom cursor */
     }
     a {
       text-decoration: none;
@@ -69,6 +72,37 @@
     img {
       max-width: 100%;
       display: block;
+    }
+
+    /* =============================
+       Custom Cursor
+    ============================== */
+    #custom-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      background: var(--primary-color);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease;
+      z-index: 2000;
+    }
+
+    /* =============================
+       Progress Bar at Top
+    ============================== */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: var(--primary-color);
+      width: 0%;
+      z-index: 1500;
+      transition: width 0.1s ease;
     }
 
     /* =============================
@@ -96,8 +130,9 @@
       padding: 15px 0;
     }
     .logo {
+      font-family: 'Montserrat', sans-serif;
       font-size: 1.8rem;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 1px;
       color: var(--text-color);
     }
@@ -179,7 +214,7 @@
     }
 
     /* =============================
-       Hero Section
+       Hero Section with Particle Background & Typewriter Text
     ============================== */
     .hero {
       position: relative;
@@ -189,35 +224,52 @@
       justify-content: center;
       text-align: center;
       padding: 0 20px;
-      background: var(--gradient-bg);
-      background-attachment: fixed;
       overflow: hidden;
     }
-    /* SVG background shapes for extra visual flair */
-    .hero svg {
+    /* Particle background container */
+    #particles-js {
       position: absolute;
-      width: 300px;
-      opacity: 0.1;
-      animation: float 6s ease-in-out infinite;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 0;
     }
-    .hero svg:nth-child(1) {
-      top: 10%;
-      left: 5%;
+    /* Optional Video Background (uncomment if you have a video)
+    #hero-video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      top: 0;
+      left: 0;
+      z-index: 0;
     }
-    .hero svg:nth-child(2) {
-      bottom: 10%;
-      right: 5%;
-      animation-delay: 3s;
+    */
+    /* Hero Content */
+    .hero .hero-content {
+      position: relative;
+      z-index: 1;
     }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-    }
+    /* Typewriter effect for hero headline */
     .hero h1 {
+      font-family: 'Montserrat', sans-serif;
       font-size: 3rem;
       margin-bottom: 20px;
       color: var(--text-color);
-      animation: fadeInDown 0.8s forwards;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid var(--primary-color);
+      animation: typewriter 4s steps(40) 1s forwards, blink-caret 0.75s step-end infinite;
+      width: 0;
+    }
+    @keyframes typewriter {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    @keyframes blink-caret {
+      from, to { border-color: transparent; }
+      50% { border-color: var(--primary-color); }
     }
     .hero p {
       font-size: 1.25rem;
@@ -235,9 +287,9 @@
       border-radius: 50px;
       cursor: pointer;
       transition: background 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 4px 8px var(--shadow-color);
       animation: fadeInDown 0.8s forwards;
       animation-delay: 0.6s;
-      box-shadow: 0 4px 8px var(--shadow-color);
     }
     .cta:hover {
       background: var(--secondary-color);
@@ -257,6 +309,7 @@
       overflow: hidden;
     }
     section h2 {
+      font-family: 'Montserrat', sans-serif;
       text-align: center;
       font-size: 2.5rem;
       margin-bottom: 50px;
@@ -282,7 +335,7 @@
     }
 
     /* =============================
-       Cards (Events)
+       Cards (Events) with Glassmorphism
     ============================== */
     .cards {
       display: flex;
@@ -300,6 +353,7 @@
       cursor: pointer;
       position: relative;
       overflow: hidden;
+      backdrop-filter: blur(10px);
     }
     .card:hover {
       transform: translateY(-5px);
@@ -382,6 +436,7 @@
       box-shadow: 0 2px 8px var(--shadow-color);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: default;
+      backdrop-filter: blur(10px);
     }
     .stat-card:hover {
       transform: translateY(-3px);
@@ -426,10 +481,10 @@
     }
 
     /* =============================
-       Footer
+       Footer with Gradient Background
     ============================== */
     footer {
-      background: var(--text-color);
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
       color: var(--bg-color);
       padding: 50px 0;
       text-align: center;
@@ -449,7 +504,7 @@
       transition: transform 0.3s ease, color 0.3s ease;
     }
     .socials a:hover {
-      color: var(--primary-color);
+      color: var(--accent-color);
       transform: scale(1.1);
     }
 
@@ -489,45 +544,44 @@
     }
 
     /* =============================
-       Chatbot Icon
+       Loading Spinner
     ============================== */
-    #chatbot {
+    #loading-spinner {
       position: fixed;
-      bottom: 100px;
-      right: 40px;
-      background: var(--primary-color);
-      color: #fff;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 4px 8px var(--shadow-color);
-      transition: transform 0.3s ease;
-      z-index: 1000;
-    }
-    #chatbot:hover {
-      transform: scale(1.1);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.5rem;
+      background: var(--bg-color);
+      padding: 20px;
+      border-radius: 8px;
+      display: none;
+      z-index: 3000;
     }
   </style>
 </head>
 <body data-theme="light">
+  <!-- Custom Cursor -->
+  <div id="custom-cursor"></div>
+  <!-- Progress Bar -->
+  <div id="progress-bar"></div>
+  <!-- Loading Spinner (for dynamic content if needed) -->
+  <div id="loading-spinner" role="status" aria-live="polite">Loading...</div>
+  
   <!-- Navigation -->
   <header>
     <div class="container">
       <nav>
-        <div class="logo">TPUSA @ UC San Diego</div>
-        <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
+        <div class="logo" aria-label="TPUSA at UC San Diego Home">TPUSA @ UC San Diego</div>
+        <div class="menu-toggle" id="mobile-menu" aria-label="Toggle navigation menu"><i class="fas fa-bars"></i></div>
         <ul id="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#mission">Mission</a></li>
-          <li><a href="#events">Events</a></li>
-          <li><a href="#testimonials">Testimonials</a></li>
-          <li class="cta-nav"><a href="#join">Join</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><span class="theme-toggle" id="theme-toggle"><i class="fas fa-moon"></i></span></li>
+          <li><a href="#about" aria-label="Navigate to About section">About</a></li>
+          <li><a href="#mission" aria-label="Navigate to Mission section">Mission</a></li>
+          <li><a href="#events" aria-label="Navigate to Events section">Events</a></li>
+          <li><a href="#testimonials" aria-label="Navigate to Testimonials section">Testimonials</a></li>
+          <li class="cta-nav"><a href="#join" aria-label="Join our community">Join</a></li>
+          <li><a href="#contact" aria-label="Navigate to Contact section">Contact</a></li>
+          <li><span class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark/Light Mode"><i class="fas fa-moon"></i></span></li>
         </ul>
       </nav>
     </div>
@@ -535,17 +589,17 @@
 
   <!-- Hero Section -->
   <section class="hero">
-    <!-- SVG Graphics for Visual Impact -->
-    <svg viewBox="0 0 100 100">
-      <circle cx="50" cy="50" r="40" fill="var(--primary-color)" />
-    </svg>
-    <svg viewBox="0 0 100 100">
-      <rect x="20" y="20" width="60" height="60" fill="var(--primary-color)" transform="rotate(45 50 50)" />
-    </svg>
-    <div class="fade-in">
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+    <!-- Optional Video Background (uncomment below if using a video)
+    <video autoplay loop muted playsinline id="hero-video" loading="lazy" poster="video-poster.jpg">
+      <source src="video.mp4" type="video/mp4">
+    </video>
+    -->
+    <div class="hero-content fade-in">
       <h1>Empowering Conservative Voices</h1>
       <p>Welcome to TPUSA at UC San Diego – where ideas ignite change and leadership thrives.</p>
-      <button class="cta" onclick="heroCTA()">Join Us</button>
+      <button class="cta" onclick="heroCTA()" aria-label="Join Us">Join Us</button>
     </div>
   </section>
 
@@ -578,19 +632,19 @@
     <div class="container">
       <h2 class="fade-in">Upcoming Events</h2>
       <div class="cards">
-        <div class="card fade-in" style="animation-delay: 0.4s;">
+        <div class="card fade-in" style="animation-delay: 0.4s;" tabindex="0" aria-label="Event: Leadership Summit">
           <h3>Leadership Summit</h3>
           <p>
             Join us for an immersive experience where you'll learn from seasoned leaders and network with peers.
           </p>
         </div>
-        <div class="card fade-in" style="animation-delay: 0.5s;">
+        <div class="card fade-in" style="animation-delay: 0.5s;" tabindex="0" aria-label="Event: Campus Forum">
           <h3>Campus Forum</h3>
           <p>
             Engage in thoughtful discussions on the latest issues affecting our community and the nation.
           </p>
         </div>
-        <div class="card fade-in" style="animation-delay: 0.6s;">
+        <div class="card fade-in" style="animation-delay: 0.6s;" tabindex="0" aria-label="Event: Workshop Series">
           <h3>Workshop Series</h3>
           <p>
             Participate in hands-on sessions designed to hone your leadership and organizational skills.
@@ -656,22 +710,20 @@
         <p>
           Ready to make an impact? Join our community of driven and passionate individuals. Together, we can shape the future of UC San Diego and beyond.
         </p>
-        <button class="cta" onclick="window.location.href='mailto:contact@tpusa-ucsd.org';">
-          Sign Up Now
-        </button>
+        <button class="cta" onclick="window.location.href='mailto:contact@tpusa-ucsd.org';" aria-label="Sign Up Now">Sign Up Now</button>
       </div>
     </div>
   </section>
 
-  <!-- Newsletter Subscription Section -->
+  <!-- Newsletter Subscription Section with Real-Time Validation -->
   <section id="newsletter">
     <div class="container">
       <h2 class="fade-in">Stay Updated</h2>
       <div class="content fade-in" style="animation-delay: 0.3s;">
         <p>Subscribe to our newsletter for the latest updates and events.</p>
-        <form id="newsletter-form" onsubmit="subscribeNewsletter(event)">
-          <input type="email" id="email" placeholder="Your Email" required />
-          <button type="submit" class="cta">Subscribe</button>
+        <form id="newsletter-form" onsubmit="subscribeNewsletter(event)" novalidate>
+          <input type="email" id="email" placeholder="Your Email" required aria-label="Email address" />
+          <button type="submit" class="cta" aria-label="Subscribe">Subscribe</button>
         </form>
       </div>
     </div>
@@ -687,7 +739,7 @@
         </p>
         <p>
           Email:
-          <a href="mailto:contact@tpusa-ucsd.org">contact@tpusa-ucsd.org</a>
+          <a href="mailto:contact@tpusa-ucsd.org" aria-label="Email us at contact@tpusa-ucsd.org">contact@tpusa-ucsd.org</a>
         </p>
       </div>
     </div>
@@ -697,21 +749,21 @@
   <footer>
     <div class="container">
       <div class="socials">
-        <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
       </div>
       <p>&copy; 2025 TPUSA at UC San Diego. All rights reserved.</p>
     </div>
   </footer>
 
   <!-- Scroll To Top Button -->
-  <button id="scrollToTop" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
+  <button id="scrollToTop" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });" aria-label="Scroll to top">
     <i class="fas fa-arrow-up"></i>
   </button>
 
   <!-- Chatbot Icon -->
-  <div id="chatbot" onclick="alert('Chat feature coming soon!')">
+  <div id="chatbot" onclick="alert('Chat feature coming soon!')" aria-label="Chatbot">
     <i class="fas fa-comment-dots"></i>
   </div>
 
@@ -724,7 +776,7 @@
       document.getElementById('nav-links').classList.toggle('active');
     });
 
-    // Light/Dark Mode Toggle
+    // Light/Dark Mode Toggle with smooth transition
     const themeToggle = document.getElementById('theme-toggle');
     themeToggle.addEventListener('click', function () {
       const body = document.body;
@@ -771,20 +823,34 @@
     }
     setInterval(nextSlide, 5000); // Change slide every 5 seconds
 
-    // Scroll to top button visibility
+    // Scroll to top button visibility and progress bar update
     const scrollBtn = document.getElementById('scrollToTop');
     window.addEventListener('scroll', function () {
-      if (window.scrollY > 300) {
+      const scrollTop = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      document.getElementById('progress-bar').style.width = scrollPercent + '%';
+
+      if (scrollTop > 300) {
         scrollBtn.style.display = 'block';
       } else {
         scrollBtn.style.display = 'none';
       }
     });
 
-    // Dummy Newsletter Subscription function
+    // Dummy Newsletter Subscription function with Email Validation
+    function validateEmail(email) {
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return regex.test(email);
+    }
     function subscribeNewsletter(event) {
       event.preventDefault();
-      const email = document.getElementById('email').value;
+      const emailInput = document.getElementById('email');
+      const email = emailInput.value;
+      if (!validateEmail(email)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
       alert('Thank you for subscribing with ' + email);
       document.getElementById('newsletter-form').reset();
     }
@@ -808,7 +874,7 @@
     const animateStats = () => {
       statNumbers.forEach(stat => {
         const target = +stat.getAttribute('data-target');
-        const increment = target / 200; // Adjust speed
+        const increment = target / 200;
         let current = 0;
         const updateNumber = () => {
           current += increment;
@@ -822,7 +888,6 @@
         updateNumber();
       });
     };
-
     // Trigger stats animation when the Impact section is visible
     const impactSection = document.getElementById('impact');
     const impactObserver = new IntersectionObserver((entries, observer) => {
@@ -834,6 +899,101 @@
       });
     }, { threshold: 0.5 });
     impactObserver.observe(impactSection);
+
+    // Initialize Particles.js for background effect in hero section
+    particlesJS("particles-js", {
+      "particles": {
+        "number": {
+          "value": 80,
+          "density": {
+            "enable": true,
+            "value_area": 800
+          }
+        },
+        "color": {
+          "value": "#4285F4"
+        },
+        "shape": {
+          "type": "circle",
+          "stroke": {
+            "width": 0,
+            "color": "#000000"
+          }
+        },
+        "opacity": {
+          "value": 0.5,
+          "random": false,
+          "anim": {
+            "enable": false
+          }
+        },
+        "size": {
+          "value": 3,
+          "random": true,
+          "anim": {
+            "enable": false
+          }
+        },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#4285F4",
+          "opacity": 0.4,
+          "width": 1
+        },
+        "move": {
+          "enable": true,
+          "speed": 4,
+          "direction": "none",
+          "random": false,
+          "straight": false,
+          "out_mode": "out"
+        }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": {
+            "enable": true,
+            "mode": "grab"
+          },
+          "onclick": {
+            "enable": true,
+            "mode": "push"
+          },
+          "resize": true
+        },
+        "modes": {
+          "grab": {
+            "distance": 140,
+            "line_linked": {
+              "opacity": 1
+            }
+          },
+          "push": {
+            "particles_nb": 4
+          }
+        }
+      },
+      "retina_detect": true
+    });
+
+    // Custom Cursor functionality
+    const customCursor = document.getElementById('custom-cursor');
+    document.addEventListener('mousemove', (e) => {
+      customCursor.style.top = e.clientY + 'px';
+      customCursor.style.left = e.clientX + 'px';
+    });
+    // Optional: Enlarge cursor on hover over interactive elements
+    const interactiveElements = document.querySelectorAll('a, button, .card');
+    interactiveElements.forEach(elem => {
+      elem.addEventListener('mouseenter', () => {
+        customCursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+      });
+      elem.addEventListener('mouseleave', () => {
+        customCursor.style.transform = 'translate(-50%, -50%) scale(1)';
+      });
+    });
   </script>
 </body>
 </html>
