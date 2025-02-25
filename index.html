@@ -3,39 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Empowering Conservative Voices at UC San Diego. Join TPUSA for dynamic events, leadership, and innovative activism." />
   <title>TPUSA at UC San Diego</title>
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Lexend for headings and Inter for body -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Lexend:wght@700&display=swap" rel="stylesheet" />
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-        integrity="sha512-Fo3rlrZj/k7ujTTXRN9ewzBj1wU2H/SxHceZL5p6W3wX4u2dGkZK0pXc0RxypFBT9ZYCM6EjkP2gRnZc5cdFAw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Font Awesome for clean, simplistic icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    integrity="sha512-Fo3rlrZj/k7ujTTXRN9ewzBj1wU2H/SxHceZL5p6W3wX4u2dGkZK0pXc0RxypFBT9ZYCM6EjkP2gRnZc5cdFAw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
   <!-- External Stylesheet -->
   <link rel="stylesheet" href="style.css" />
-  <!-- GSAP and ScrollTrigger -->
+  <!-- GSAP Library for advanced animations -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
-  <!-- Particles.js -->
+  <!-- Particles.js Library for background effects -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
-  <!-- Canvas Confetti -->
+  <!-- Canvas Confetti Library for CTA effect -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body data-theme="light">
-  <!-- Cookie Consent Banner -->
-  <div id="cookie-banner" class="cookie-banner">
-    <p>We use cookies to improve your experience.
-      <button id="cookie-accept">Got it!</button>
-    </p>
-  </div>
-
   <!-- Progress Bar -->
   <div id="progress-bar"></div>
   <!-- Loading Spinner -->
   <div id="loading-spinner" role="status" aria-live="polite">Loading...</div>
-
+  
   <!-- Navigation -->
   <header>
     <div class="container">
@@ -63,169 +58,162 @@
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main>
-    <!-- Hero Section with Video Overlay & Particles -->
-    <section class="hero">
-      <!-- Video Background (with fallback image in CSS) -->
-      <video class="hero-video" autoplay muted loop>
-        <source src="hero-bg-video.mp4" type="video/mp4" />
-      </video>
-      <!-- Particle Background -->
-      <div id="particles-js"></div>
-      <!-- Hero Content -->
-      <div class="hero-content fade-in">
-        <h1>Empowering Conservative Voices</h1>
-        <p>Welcome to TPUSA at UC San Diego – where ideas ignite change and leadership thrives.</p>
-        <button class="cta" onclick="heroCTA()" aria-label="Join Us">Join Us</button>
-      </div>
-    </section>
+  <!-- Hero Section -->
+  <section class="hero">
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+    <!-- Hero Content -->
+    <div class="hero-content fade-in">
+      <h1>Empowering Conservative Voices</h1>
+      <p>Welcome to TPUSA at UC San Diego – where ideas ignite change and leadership thrives.</p>
+      <button class="cta" onclick="heroCTA()" aria-label="Join Us">Join Us</button>
+    </div>
+  </section>
 
-    <!-- About Section -->
-    <section id="about">
-      <div class="container">
-        <h2 class="fade-in">About Us <i class="fas fa-info-circle"></i></h2>
-        <div class="content fade-in" style="animation-delay: 0.3s;">
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <h2 class="fade-in">About Us <i class="fas fa-info-circle"></i></h2>
+      <div class="content fade-in" style="animation-delay: 0.3s;">
+        <p>
+          TPUSA at UC San Diego is dedicated to fostering a community of innovative and forward-thinking conservative students. We strive to empower our members to lead, advocate, and create a vibrant environment for dialogue and change on campus.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section id="mission">
+    <div class="container">
+      <h2 class="fade-in">Our Mission <i class="fas fa-bullseye"></i></h2>
+      <div class="content fade-in" style="animation-delay: 0.3s;">
+        <p>
+          Our mission is to build a network of like-minded individuals who are passionate about promoting free enterprise, individual liberty, and limited government. We aim to inspire leadership through educational events, meaningful discussions, and hands-on experiences.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events Section -->
+  <section id="events">
+    <div class="container">
+      <h2 class="fade-in">Upcoming Events <i class="fas fa-calendar-alt"></i></h2>
+      <div class="cards">
+        <div class="card fade-in" style="animation-delay: 0.4s;" tabindex="0" aria-label="Event: Leadership Summit">
+          <h3><i class="fas fa-chalkboard-teacher"></i> Leadership Summit</h3>
           <p>
-            TPUSA at UC San Diego is dedicated to fostering a community of innovative and forward-thinking conservative students. We empower our members to lead, advocate, and spark change on campus.
+            Join us for an immersive experience where you'll learn from seasoned leaders and network with peers.
+          </p>
+        </div>
+        <div class="card fade-in" style="animation-delay: 0.5s;" tabindex="0" aria-label="Event: Campus Forum">
+          <h3><i class="fas fa-comments"></i> Campus Forum</h3>
+          <p>
+            Engage in thoughtful discussions on the latest issues affecting our community and the nation.
+          </p>
+        </div>
+        <div class="card fade-in" style="animation-delay: 0.6s;" tabindex="0" aria-label="Event: Workshop Series">
+          <h3><i class="fas fa-tools"></i> Workshop Series</h3>
+          <p>
+            Participate in hands-on sessions designed to hone your leadership and organizational skills.
           </p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Mission Section -->
-    <section id="mission">
-      <div class="container">
-        <h2 class="fade-in">Our Mission <i class="fas fa-bullseye"></i></h2>
-        <div class="content fade-in" style="animation-delay: 0.3s;">
-          <p>
-            Our mission is to unite like-minded individuals passionate about free enterprise, individual liberty, and limited government through innovative events, discussions, and hands-on experiences.
-          </p>
+  <!-- Testimonials Section -->
+  <section id="testimonials">
+    <div class="container">
+      <h2 class="fade-in">Testimonials <i class="fas fa-quote-right"></i></h2>
+      <div class="testimonial-slider fade-in">
+        <div class="testimonial-slide active">
+          <div class="testimonial-content">
+            <p>"TPUSA at UC San Diego has truly transformed my perspective on leadership and activism."</p>
+            <h4>- Alex M.</h4>
+          </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Events Section -->
-    <section id="events">
-      <div class="container">
-        <h2 class="fade-in">Upcoming Events <i class="fas fa-calendar-alt"></i></h2>
-        <div class="cards">
-          <div class="card fade-in" style="animation-delay: 0.4s;" tabindex="0" aria-label="Event: Leadership Summit">
-            <h3><i class="fas fa-chalkboard-teacher"></i> Leadership Summit</h3>
-            <p>
-              Learn from seasoned leaders and network with peers in an immersive experience.
-            </p>
+        <div class="testimonial-slide">
+          <div class="testimonial-content">
+            <p>"The events are not only informative but also incredibly engaging and inspiring."</p>
+            <h4>- Jamie L.</h4>
           </div>
-          <div class="card fade-in" style="animation-delay: 0.5s;" tabindex="0" aria-label="Event: Campus Forum">
-            <h3><i class="fas fa-comments"></i> Campus Forum</h3>
-            <p>
-              Engage in thoughtful discussions on current issues impacting our community.
-            </p>
-          </div>
-          <div class="card fade-in" style="animation-delay: 0.6s;" tabindex="0" aria-label="Event: Workshop Series">
-            <h3><i class="fas fa-tools"></i> Workshop Series</h3>
-            <p>
-              Participate in hands-on sessions to develop your leadership and organizational skills.
-            </p>
+        </div>
+        <div class="testimonial-slide">
+          <div class="testimonial-content">
+            <p>"Joining TPUSA has been one of the best decisions of my college experience."</p>
+            <h4>- Casey R.</h4>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Testimonials Section -->
-    <section id="testimonials">
-      <div class="container">
-        <h2 class="fade-in">Testimonials <i class="fas fa-quote-right"></i></h2>
-        <div class="testimonial-slider fade-in">
-          <div class="testimonial-slide active">
-            <div class="testimonial-content">
-              <p>"TPUSA at UC San Diego has transformed my view on leadership and activism."</p>
-              <h4>- Alex M.</h4>
-            </div>
-          </div>
-          <div class="testimonial-slide">
-            <div class="testimonial-content">
-              <p>"The events are engaging, informative, and truly inspiring."</p>
-              <h4>- Jamie L.</h4>
-            </div>
-          </div>
-          <div class="testimonial-slide">
-            <div class="testimonial-content">
-              <p>"Joining TPUSA has been one of the best decisions of my college experience."</p>
-              <h4>- Casey R.</h4>
-            </div>
-          </div>
+  <!-- Impact/Statistics Section -->
+  <section id="impact">
+    <div class="container">
+      <h2 class="fade-in">Our Impact <i class="fas fa-chart-line"></i></h2>
+      <div class="stats-container fade-in" style="animation-delay: 0.3s;">
+        <div class="stat-card">
+          <i class="fas fa-users"></i>
+          <div class="stat-number" data-target="150">0</div>
+          <div class="stat-label">Members</div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-calendar-check"></i>
+          <div class="stat-number" data-target="25">0</div>
+          <div class="stat-label">Events Held</div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-university"></i>
+          <div class="stat-number" data-target="10">0</div>
+          <div class="stat-label">Campus Outreach</div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Impact/Statistics Section -->
-    <section id="impact">
-      <div class="container">
-        <h2 class="fade-in">Our Impact <i class="fas fa-chart-line"></i></h2>
-        <div class="stats-container fade-in" style="animation-delay: 0.3s;">
-          <div class="stat-card">
-            <i class="fas fa-users"></i>
-            <div class="stat-number" data-target="150">0</div>
-            <div class="stat-label">Members</div>
-          </div>
-          <div class="stat-card">
-            <i class="fas fa-calendar-check"></i>
-            <div class="stat-number" data-target="25">0</div>
-            <div class="stat-label">Events Held</div>
-          </div>
-          <div class="stat-card">
-            <i class="fas fa-university"></i>
-            <div class="stat-number" data-target="10">0</div>
-            <div class="stat-label">Campus Outreach</div>
-          </div>
-        </div>
+  <!-- Join Section -->
+  <section id="join">
+    <div class="container">
+      <h2 class="fade-in">Become a Member <i class="fas fa-user-plus"></i></h2>
+      <div class="content fade-in" style="animation-delay: 0.3s;">
+        <p>
+          Ready to make an impact? Join our community of driven and passionate individuals. Together, we can shape the future of UC San Diego and beyond.
+        </p>
+        <button class="cta" onclick="window.location.href='mailto:contact@tpusa-ucsd.org';" aria-label="Sign Up Now">Sign Up Now</button>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Join Section -->
-    <section id="join">
-      <div class="container">
-        <h2 class="fade-in">Become a Member <i class="fas fa-user-plus"></i></h2>
-        <div class="content fade-in" style="animation-delay: 0.3s;">
-          <p>
-            Ready to make an impact? Join our community of driven individuals and help shape the future of UC San Diego.
-          </p>
-          <button class="cta" onclick="window.location.href='mailto:contact@tpusa-ucsd.org';" aria-label="Sign Up Now">Sign Up Now</button>
-        </div>
+  <!-- Newsletter Subscription Section -->
+  <section id="newsletter">
+    <div class="container">
+      <h2 class="fade-in">Stay Updated <i class="fas fa-envelope"></i></h2>
+      <div class="content fade-in" style="animation-delay: 0.3s;">
+        <p>Subscribe to our newsletter for the latest updates and events.</p>
+        <form id="newsletter-form" onsubmit="subscribeNewsletter(event)" novalidate>
+          <input type="email" id="email" placeholder="Your Email" required aria-label="Email address" />
+          <button type="submit" class="cta" aria-label="Subscribe">Subscribe</button>
+        </form>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Newsletter Subscription Section -->
-    <section id="newsletter">
-      <div class="container">
-        <h2 class="fade-in">Stay Updated <i class="fas fa-envelope"></i></h2>
-        <div class="content fade-in" style="animation-delay: 0.3s;">
-          <p>Subscribe to our newsletter for the latest updates and events.</p>
-          <form id="newsletter-form" onsubmit="subscribeNewsletter(event)" novalidate>
-            <input type="email" id="email" placeholder="Your Email" required aria-label="Email address" />
-            <button type="submit" class="cta" aria-label="Subscribe">Subscribe</button>
-          </form>
-        </div>
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="fade-in">Contact Us <i class="fas fa-headset"></i></h2>
+      <div class="content fade-in" style="animation-delay: 0.3s;">
+        <p>
+          Have questions or want to learn more about TPUSA at UC San Diego? Reach out to us – we'd love to hear from you.
+        </p>
+        <p>
+          Email:
+          <a href="mailto:contact@tpusa-ucsd.org" aria-label="Email us at contact@tpusa-ucsd.org">contact@tpusa-ucsd.org</a>
+        </p>
       </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-      <div class="container">
-        <h2 class="fade-in">Contact Us <i class="fas fa-headset"></i></h2>
-        <div class="content fade-in" style="animation-delay: 0.3s;">
-          <p>
-            Have questions or want to learn more about TPUSA at UC San Diego? We’d love to hear from you.
-          </p>
-          <p>
-            Email:
-            <a href="mailto:contact@tpusa-ucsd.org" aria-label="Email us at contact@tpusa-ucsd.org">contact@tpusa-ucsd.org</a>
-          </p>
-        </div>
-      </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer>
@@ -245,38 +233,20 @@
   </button>
 
   <!-- Chatbot Icon -->
-  <div id="chatbot" aria-label="Chat with us">
+  <div id="chatbot" onclick="alert('Chat feature coming soon!')" aria-label="Chatbot">
     <i class="fas fa-comment-dots"></i>
   </div>
 
-  <!-- Chat Modal -->
-  <div id="chat-modal" class="chat-modal">
-    <div class="chat-header">
-      <h3>Chat with Us</h3>
-      <span id="chat-close" class="chat-close">&times;</span>
-    </div>
-    <div class="chat-body">
-      <p>Hi, how can we help you today?</p>
-    </div>
-    <div class="chat-footer">
-      <input type="text" placeholder="Type your message..." aria-label="Chat message">
-      <button>Send</button>
-    </div>
-  </div>
-
-  <!-- JavaScript for Interactivity & Enhanced Animations -->
+  <!-- =============================
+       JavaScript for Interactivity & Effects
+  ============================== -->
   <script>
-    // Cookie Consent
-    document.getElementById('cookie-accept').addEventListener('click', function(){
-      document.getElementById('cookie-banner').style.display = 'none';
-    });
-
-    // Mobile Menu Toggle
+    // Mobile menu toggle
     document.getElementById('mobile-menu').addEventListener('click', function () {
       document.getElementById('nav-links').classList.toggle('active');
     });
 
-    // Theme Toggle
+    // Light/Dark Mode Toggle with smooth transition
     const themeToggle = document.getElementById('theme-toggle');
     themeToggle.addEventListener('click', function () {
       const body = document.body;
@@ -289,58 +259,56 @@
       }
     });
 
-    // Chatbot Modal Logic
-    const chatbotIcon = document.getElementById('chatbot');
-    const chatModal = document.getElementById('chat-modal');
-    const chatClose = document.getElementById('chat-close');
-    chatbotIcon.addEventListener('click', function(){
-      chatModal.style.display = 'block';
-    });
-    chatClose.addEventListener('click', function(){
-      chatModal.style.display = 'none';
-    });
-
-    // GSAP Hero Animations
-    gsap.from(".hero-content h1", { duration: 1.5, y: -50, opacity: 0, ease: "bounce.out" });
-    gsap.from(".hero-content p", { duration: 1.5, y: 50, opacity: 0, delay: 0.5 });
-
-    // GSAP ScrollTrigger for Section Fade-ins
-    gsap.utils.toArray("section").forEach(section => {
-      gsap.from(section, {
-        scrollTrigger: { trigger: section, start: "top 80%" },
-        opacity: 0,
-        y: 50,
-        duration: 1,
-        ease: "power1.out"
+    // Intersection Observer for fade-in effect
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOptions = {
+      threshold: 0.2,
+      rootMargin: "0px 0px -50px 0px"
+    };
+    const appearOnScroll = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
       });
+    }, appearOptions);
+    faders.forEach(fader => {
+      appearOnScroll.observe(fader);
     });
 
-    // Testimonial Slider
+    // Testimonial slider
     let currentSlide = 0;
     const slides = document.querySelectorAll('.testimonial-slide');
     function showSlide(index) {
       slides.forEach((slide, i) => {
         slide.classList.remove('active');
-        if (i === index) slide.classList.add('active');
+        if (i === index) {
+          slide.classList.add('active');
+        }
       });
     }
     function nextSlide() {
       currentSlide = (currentSlide + 1) % slides.length;
       showSlide(currentSlide);
     }
-    setInterval(nextSlide, 5000);
+    setInterval(nextSlide, 5000); // Change slide every 5 seconds
 
-    // Scroll To Top & Progress Bar
+    // Scroll to top button visibility and progress bar update
     const scrollBtn = document.getElementById('scrollToTop');
     window.addEventListener('scroll', function () {
       const scrollTop = window.scrollY;
       const docHeight = document.body.scrollHeight - window.innerHeight;
       const scrollPercent = (scrollTop / docHeight) * 100;
       document.getElementById('progress-bar').style.width = scrollPercent + '%';
-      scrollBtn.style.display = scrollTop > 300 ? 'block' : 'none';
+
+      if (scrollTop > 300) {
+        scrollBtn.style.display = 'block';
+      } else {
+        scrollBtn.style.display = 'none';
+      }
     });
 
-    // Newsletter Subscription
+    // Newsletter Subscription with Email Validation
     function validateEmail(email) {
       const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       return regex.test(email);
@@ -357,27 +325,19 @@
       document.getElementById('newsletter-form').reset();
     }
 
-    // Hero CTA with Confetti
+    // Hero CTA with confetti effect
     function heroCTA() {
-      confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
       setTimeout(() => {
         document.getElementById('join').scrollIntoView({ behavior: 'smooth' });
       }, 500);
     }
 
-    // Fallback Intersection Observer for fade-in (if needed)
-    const faders = document.querySelectorAll('.fade-in');
-    const appearOptions = { threshold: 0.2, rootMargin: "0px 0px -50px 0px" };
-    const appearOnScroll = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      });
-    }, appearOptions);
-    faders.forEach(fader => appearOnScroll.observe(fader));
-
-    // Animate Numbers in Impact Section
+    // Animate numbers in the Impact section
     const statNumbers = document.querySelectorAll('.stat-number');
     const animateStats = () => {
       statNumbers.forEach(stat => {
@@ -407,27 +367,76 @@
     }, { threshold: 0.5 });
     impactObserver.observe(impactSection);
 
-    // Initialize Particles.js
+    // Initialize Particles.js with enhanced 3D/multi-shape effect
     particlesJS("particles-js", {
       "particles": {
-        "number": { "value": 120, "density": { "enable": true, "value_area": 800 } },
-        "color": { "value": "#800000" },
-        "shape": { "type": ["circle", "polygon"], "stroke": { "width": 0, "color": "#800000" }, "polygon": { "nb_sides": 6 } },
-        "opacity": { "value": 0.5, "random": false },
-        "size": { "value": 3, "random": true },
-        "line_linked": { "enable": true, "distance": 150, "color": "#800000", "opacity": 0.4, "width": 1 },
-        "move": { "enable": true, "speed": 4, "direction": "none", "random": false, "straight": false, "out_mode": "out" }
+        "number": {
+          "value": 120,
+          "density": {
+            "enable": true,
+            "value_area": 800
+          }
+        },
+        "color": {
+          "value": "#800000"
+        },
+        "shape": {
+          "type": ["circle", "polygon"],
+          "stroke": {
+            "width": 0,
+            "color": "#800000"
+          },
+          "polygon": {
+            "nb_sides": 6
+          }
+        },
+        "opacity": {
+          "value": 0.5,
+          "random": false
+        },
+        "size": {
+          "value": 3,
+          "random": true
+        },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#800000",
+          "opacity": 0.4,
+          "width": 1
+        },
+        "move": {
+          "enable": true,
+          "speed": 4,
+          "direction": "none",
+          "random": false,
+          "straight": false,
+          "out_mode": "out"
+        }
       },
       "interactivity": {
         "detect_on": "canvas",
         "events": {
-          "onhover": { "enable": true, "mode": "grab" },
-          "onclick": { "enable": true, "mode": "push" },
+          "onhover": {
+            "enable": true,
+            "mode": "grab"
+          },
+          "onclick": {
+            "enable": true,
+            "mode": "push"
+          },
           "resize": true
         },
         "modes": {
-          "grab": { "distance": 140, "line_linked": { "opacity": 1 } },
-          "push": { "particles_nb": 4 }
+          "grab": {
+            "distance": 140,
+            "line_linked": {
+              "opacity": 1
+            }
+          },
+          "push": {
+            "particles_nb": 4
+          }
         }
       },
       "retina_detect": true
